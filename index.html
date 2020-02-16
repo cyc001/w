@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>TypeScript HTML App</title>
+
+    <meta name="viewport"  content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" href="app.css" type="text/css" />
+
+    <script src="./t_js/basicUsbCalls.js"></script>
+
+    <script src="./t_js/Cp2102.js"></script>
+
+
+    <script src="./t_js/WebUsbSerial.js"></script>
+    <script src="app.js"></script>
+</head>
+<body>
+    <h1>TypeScript HTML App</h1>
+
+    <div id="content"></div>
+
+
+    <button id="connect" style="visibility: initial">Connect To WebUSB Device</button>
+    <br><br><label for="title">Sender: </label> <br>
+    <textarea id="editor" , rows="25" cols="80">WebUSB!</textarea>
+    <br><button id="submit">Send</button>
+    <br><br>
+    <label for="title">Receiver: </label> <br>
+    <textarea id="output" , rows="25" cols="80" ></textarea>
+</body>
+</html>
