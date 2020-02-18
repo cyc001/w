@@ -21,9 +21,12 @@ const CP210x_UART_DISABLE = 0x0000;
 const CP210x_SET_BAUDRATE = 0x1e;
 const CP210x_GET_COMM_STATUS = 0x10;
 class CP210x {
+    constructor() {
+        this.BasicCalls = new BasicCalls();
+    }
     open(usbDevice) {
         return __awaiter(this, void 0, void 0, function* () {
-            usbDevice.open().claimInterface(0);
+            yield usbDevice.open();
             // Check configuration?
             // https://wicg.github.io/webusb/#ref-for-dom-usbdevice-selectconfiguration
             yield usbDevice.claimInterface(0);

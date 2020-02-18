@@ -16,9 +16,12 @@ const CP210x_GET_COMM_STATUS = 0x10;
 
 class CP210x {
     BasicCalls: BasicCalls;
+    constructor() {
+        this.BasicCalls = new BasicCalls();
+    }
     public async  open(usbDevice): Promise<void> {
        
-        usbDevice.open().claimInterface(0);
+        await usbDevice.open();
 
         // Check configuration?
         // https://wicg.github.io/webusb/#ref-for-dom-usbdevice-selectconfiguration
