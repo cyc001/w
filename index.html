@@ -3,18 +3,16 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>TypeScript HTML App</title>
+    <title>WebUSB v0.0</title>
 
-    <meta name="viewport"  content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <link rel="stylesheet" href="app.css" type="text/css" />
-
+    <script src="./t_js/Device.js"></script>
     <script src="./t_js/basicUsbCalls.js"></script>
-
+    
     <script src="./t_js/Cp2102.js"></script>
-
-
-    <script src="./t_js/WebUsbSerial.js"></script>
+    <script src="./t_js/STM32SerialDriver.js"></script>
     <script src="app.js"></script>
 </head>
 <body>
@@ -24,11 +22,16 @@
 
 
     <button id="connect" style="visibility: initial">Connect To WebUSB Device</button>
+    <button id="close" style="visibility: initial">close</button>
+
+    <br><textarea id="debug" , rows="15" cols="80"></textarea>
     <br><br><label for="title">Sender: </label> <br>
-    <textarea id="editor" , rows="25" cols="80">WebUSB!</textarea>
+    <textarea id="editor" , rows="5" cols="80">WebUSB!</textarea>
     <br><button id="submit">Send</button>
     <br><br>
     <label for="title">Receiver: </label> <br>
-    <textarea id="output" , rows="25" cols="80" ></textarea>
+    <br><button id="read">read</button>
+    <textarea id="output" , rows="5" cols="80"></textarea>
+
 </body>
 </html>
