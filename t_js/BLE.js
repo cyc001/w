@@ -70,19 +70,13 @@ class BLE {
     ;
     requestDevice(prefix) {
         var options = {
-            filters: [],
+            filters: [{
+                    namePrefix: "[]",
+                    services: [this.SERVICE_UUID],
+                    name: 'cyccyc_ETH',
+                }],
             optionalServices: [this.SERVICE_UUID]
         };
-        /*
-        var options = {
-            filters: [{
-                namePrefix: "[]",
-                services: [this.SERVICE_UUID],
-                name: 'cyccyc_ETH',
-            }],
-
-            optionalServices: [this.SERVICE_UUID]
-        };*/
         ////    for (var p in prefix) {
         //       options.filters.push(prefix[p]);//{ namePrefix: p });// prefix[p] });
         //     }
