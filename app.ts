@@ -2,10 +2,22 @@
 //import * as CP210x from './t_js/WebUsbSerial'
 var dev:Dev;
 var db;
+var process: Process;
+var ble: BLE;
+
+let begin_bytes: Uint8Array = new Uint8Array([0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x39]);
+let pause_bytes: Uint8Array = new Uint8Array([0x30, 0x30, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x39]);
+let heart_bytes: Uint8Array = new Uint8Array([0x30, 'h'.charCodeAt(0), 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x39]);
+
+let get_emt_bytes: Uint8Array = new Uint8Array( [ 0x30, 0x32, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x39 ]);
+let degree_str = "℃";//°F
+
+let timerToken: number;
+let timer_status="null"
 class Greeter {
     element: HTMLElement;
     span: HTMLElement;
-    timerToken: number;
+    
 
     constructor(element: HTMLElement) {
         this.element = element;
@@ -15,22 +27,28 @@ class Greeter {
         this.span.innerText = new Date().toUTCString();
 
         db = document.getElementById('debug');
+
+        process = new Process();
         dev = new Dev();
+        ble = new BLE();
     }
 
     start() {
-        this.timerToken = setInterval(() => this.test(), 500);
+        timerToken = setInterval(() => this.test(), 500);
+        timer_status="run"
     }
 
     stop() {
-        clearTimeout(this.timerToken);
+        clearTimeout(timerToken);
     }
 
     test() {
-
+        if (timer_status == "pause") return;
+        process.draw_chart_0();
+        dev.write(begin_bytes);
     }
 }
-var serial = {};
+
 window.onload = () => {
     var el = document.getElementById('content');
     var greeter = new Greeter(el);
@@ -38,7 +56,18 @@ window.onload = () => {
 
     var t = document.getElementById("editor");
     document.getElementById("connect").addEventListener("click", () => {
-        dev.requestDevice();
+        var prefix = { "name": "cyccyc_ETH" };
+        ble.requestAndConnectDevice(prefix)
+            .then(device => {
+                //device connected
+                db_msg("ok: ");
+            })
+            .catch(e => {
+                //error
+                db_msg("ERROR: " + e);
+            });
+
+       // dev.requestDevice();
     });
     var td = [0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x39];
     var d: Uint8Array = Uint8Array.from(td);
@@ -48,11 +77,18 @@ window.onload = () => {
         dev.write(d);
     });
 
-    document.getElementById("read").addEventListener("click", () => {
+  /*  document.getElementById("read").addEventListener("click", () => {
         dev.read();
-    });
+    });*/
 
     document.getElementById("close").addEventListener("click", () => {
         dev.close();
     });
+
+
+
+};
+
+window.onunload  = (e) => {
+    dev.close();
 };

@@ -3,16 +3,27 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>WebUSB v0.0</title>
+    <title>Temperature V0.1</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <link rel="stylesheet" href="app.css" type="text/css" />
+
     <script src="./t_js/Device.js"></script>
     <script src="./t_js/basicUsbCalls.js"></script>
-    
     <script src="./t_js/Cp2102.js"></script>
     <script src="./t_js/STM32SerialDriver.js"></script>
+
+    <script src="./t_js/BLE.js"></script>
+    <!--
+    <script src="./t_js/spo2/alg_max30102.js"></script>
+    <script src="./t_js/spo2/Draw_Canvas.js"></script>
+    <script src="./t_js/spo2/Process.js"></script>
+    -->
+
+    <script src="./t_js/ir_temp/Draw_Canvas.js"></script>
+    <script src="./t_js/ir_temp/Process.js"></script>
+
     <script src="app.js"></script>
 </head>
 <body>
@@ -24,13 +35,32 @@
     <button id="connect" style="visibility: initial">Connect To WebUSB Device</button>
     <button id="close" style="visibility: initial">close</button>
 
-    <br><textarea id="debug" , rows="15" cols="80"></textarea>
+    <br><textarea id="debug" , rows="5" cols="80"></textarea>
     <br><br><label for="title">Sender: </label> <br>
-    <textarea id="editor" , rows="5" cols="80">WebUSB!</textarea>
+    <textarea id="editor" , rows="2" cols="80">WebUSB!</textarea>
     <br><button id="submit">Send</button>
     <br><br>
     <label for="title">Receiver: </label> <br>
-    <br><button id="read">read</button>
-    <textarea id="output" , rows="5" cols="80"></textarea>
+
+    <textarea id="output" , rows="2" cols="80"></textarea>
+
+    <div id="rt-time">
+        <br>
+        <br>
+        <br>
+        <div id="rt-data" style="vertical-align:bottom;">
+            <div id="rt_obj_div" style="position:absolute; border-bottom:3px double red;right:50%;text-align:right; font-size:48px;font-family:Arial;">
+                obj
+            </div>
+            <div id="rt_amb_div" style="position:absolute; left:52%;  font-size:small;">
+                <br><br>npamb
+            </div>
+        </div>
+        <br> <br><br><br>
+        <canvas id="rt_canvas" style="background-color: #000000; ">
+        </canvas><!--canvas_div!-->
+    </div>
+
+
 </body>
 </html>
