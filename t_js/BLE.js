@@ -18,7 +18,7 @@ class BLE {
         this.LOG_EVENT = "Indigo (e): ";
         this.LOG_OUTPUT = "Indigo (->): ";
         this.LOG_INPUT = "Indigo (<-): ";
-        this.SERVICE_UUID = 0xFFF0;
+        this.SERVICE_UUID = 0xFFE0;
         this.NOTIFY_UUID = "0000fff7-0000-1000-8000-00805f9b34fb";
         this.WRITE_RESPONSE_UUID = "0000fff6-0000-1000-8000-00805f9b34fb";
         this.API_MAX_LENGTH = 20;
@@ -70,13 +70,19 @@ class BLE {
     ;
     requestDevice(prefix) {
         var options = {
-            filters: [{
-                    namePrefix: "[]",
-                    services: [this.SERVICE_UUID],
-                    name: 'cyccyc_ETH',
-                }],
+            filters: [],
             optionalServices: [this.SERVICE_UUID]
         };
+        /*
+        var options = {
+            filters: [{
+                namePrefix: "[]",
+                services: [this.SERVICE_UUID],
+                name: 'cyccyc_ETH',
+            }],
+
+            optionalServices: [this.SERVICE_UUID]
+        };*/
         ////    for (var p in prefix) {
         //       options.filters.push(prefix[p]);//{ namePrefix: p });// prefix[p] });
         //     }
